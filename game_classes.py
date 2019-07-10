@@ -1,8 +1,8 @@
 import random
 
-import story_library as sl
+import game_library as gl
 
-locations = sl.locations
+locations = gl.locations
 
 
 class Player:
@@ -12,10 +12,14 @@ class Player:
         self._health = 3
         self._moves = 0
         self.has_chest = False
+        self.is_dead = False
 
     def view_health(self):
         health = str(self._health)
         return health
+
+    def view_health_num(self):
+        return self._health
 
     def view_moves(self):
         moves = str(self._moves)
@@ -51,37 +55,27 @@ class Program:
     def __init__(self):
         self.player = None
         self.current_location = 0
-        self.encountered = self.location_health()
         self.loop_break = False
 
     def main(self):
         pass
 
     def init_play(self):
-        name = input("Please enter your name to begin: ")
+        name = "Machine"
         self.player = Player(name)
 
         self.intro()
 
     def intro(self):
         print(
-            "Welcome {0.player}, the objective is to obtain a chest of gold and take it "
-            "to the Grand Master at the Coffee Shop"
-                .format(self))
+            "Welcome {0.player.name}, the objective is to obtain a chest of gold and take it "
+            "to the Grand Master at the Coffee Shop".format(self))
         print("You must do so while trying to avoid goblins, they hide in different locations, "
               "and constantly are on the move.")
         print("If a goblin sees you, you lose a some health, with {0} healths to start with.".format(
             self.player.view_health()))
         print("However, if a doctor happens to be at that location, you can gain a health.")
         print("Good luck!")
-
-        self.obtains_chest()
-
-    def obtains_chest(self):
-        if self.current_location is 12:
-            print("You have obtained the chest, hurry to the Coffee Shop!")
-            print()
-            self.player.obtains_chest()
 
     def print_locs(self):
         # print(self.locations_print
@@ -105,31 +99,58 @@ class Program:
         return text
 
     def user_direction(self):
-        loop_break = self.loop_break
-
         player_option = input("Direction: ").upper()
         player_option = self.direction_query(player_option)
 
-        if player_option == "Q":
+        if player_option is "Q":
             print("Have a good day!")
             print()
-            loop_break = True
-
-        if player_option is "Q":
-            # return self.current_location, loop_break
-            self.loop_break = loop_break
+            self.loop_break = True
 
         else:
             self.current_location = self.advance_location(player_option)  # moves to next location
-            # return current_location, loop_break
-            self.loop_break = loop_break
 
-    def get_location(self):
-        global locations
-        loc_list = []
-        for i in locations[self.current_location]["locations"]:
-            loc_list.append(i)
-        return loc_list
+    def direction_query(self, user_input):
+        available_keys = []
+        available_directions = []
+        problems = False
+
+        for i in gl.directions.values():
+            available_keys.append(i["short"])
+            available_keys.append(i["long"])
+
+        for i in gl.locations[self.current_location]["locations"]:
+            available_directions.append(i)
+
+        if user_input in available_keys:
+            for i in range(0, len(gl.directions)):
+                if user_input in gl.directions[i].values():
+                    user_input = gl.directions[i]["short"]
+                    break
+
+        if user_input not in available_keys:
+            problems = True
+
+        if (user_input in available_keys) and (user_input not in available_directions):
+            problems = True
+
+        if problems is True:
+            while problems is True:
+                user_input = input("Please enter a valid direction: ").upper()
+                if user_input in available_keys:
+                    for i in range(0, len(gl.directions)):
+                        if user_input in gl.directions[i].values():
+                            user_input = gl.directions[i]["short"]
+                            break
+                    problems = False
+                    if user_input in available_directions:
+                        problems = False
+                    else:
+                        problems = True
+                else:
+                    problems = True
+
+        return user_input
 
     def advance_location(self, direction):
         global locations
@@ -154,56 +175,18 @@ class Program:
 
         return text
 
-    def direction_query(self, user_input):
-        available_keys = []
-        available_directions = []
-        problems = False
-
-        for i in sl.directions.values():
-            available_keys.append(i["short"])
-            available_keys.append(i["long"])
-
-        for i in sl.locations[self.current_location]["locations"]:
-            available_directions.append(i)
-
-        if user_input in available_keys:
-            for i in range(0, len(sl.directions)):
-                if user_input in sl.directions[i].values():
-                    user_input = sl.directions[i]["short"]
-                    break
-
-        if user_input not in available_keys:
-            problems = True
-
-        if (user_input in available_keys) and (user_input not in available_directions):
-            problems = True
-
-        if problems is True:
-            while problems is True:
-                user_input = input("Please enter a valid direction: ").upper()
-                if user_input in available_keys:
-                    for i in range(0, len(sl.directions)):
-                        if user_input in sl.directions[i].values():
-                            user_input = sl.directions[i]["short"]
-                            break
-                    problems = False
-                    if user_input in available_directions:
-                        problems = False
-                    else:
-                        problems = True
-                else:
-                    problems = True
-
-        return user_input
-
     def encountered_stats(self):
+        did_encounter = self.location_health()
         health = self.player.view_health()
         moves = self.player.view_moves()
 
+        if health == "0":
+            self.loop_break = True
+
         print()
         print('-' * 46)
-        print("| Encountered: {0.encountered}, Health: {1:2}, Moves: {2:2} |"
-              .format(self, health, moves))
+        print("| Encountered: {0}, Health: {1:2}, Moves: {2:2} |"
+              .format(did_encounter, health, moves))
         print('-' * 46)
 
 

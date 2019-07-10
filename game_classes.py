@@ -9,44 +9,44 @@ class Player:
 
     def __init__(self, name="Guest"):
         self.name = name
-        self._health = 3
-        self._moves = 0
+        self.health = 3
+        self.moves = 0
         self.has_chest = False
         self.is_dead = False
 
     def view_health(self):
-        health = str(self._health)
+        health = str(self.health)
         return health
 
     def view_health_num(self):
-        return self._health
+        return self.health
 
     def view_moves(self):
-        moves = str(self._moves)
+        moves = str(self.moves)
         return moves
 
     def effect_health(self, amount):
         if amount < 0:
-            if self._health - amount > 0:
-                self._health += amount
-                return self._health
+            if self.health - amount > 0:
+                self.health += amount
+                return self.health
             else:
-                self._health = 0
-                return self._health
+                self.health = 0
+                return self.health
         elif amount > 0:
-            self._health += amount
-            return self._health
+            self.health += amount
+            return self.health
 
     def effect_moves(self, amount):
-        self._moves += amount
-        return self._moves
+        self.moves += amount
+        return self.moves
 
     def obtains_chest(self):
         self.has_chest = True
         return self.has_chest
 
     def add_move(self):
-        self._moves += 1
+        self.moves += 1
         return None
 
 
@@ -56,9 +56,8 @@ class Program:
         self.player = None
         self.current_location = 0
         self.loop_break = False
-
-    def main(self):
-        pass
+        self.encountered = "Nobody"
+        self.render = False
 
     def init_play(self):
         name = "Machine"
@@ -67,20 +66,24 @@ class Program:
         self.intro()
 
     def intro(self):
-        print(
-            "Welcome {0.player.name}, the objective is to obtain a chest of gold and take it "
-            "to the Grand Master at the Coffee Shop".format(self))
-        print("You must do so while trying to avoid goblins, they hide in different locations, "
-              "and constantly are on the move.")
-        print("If a goblin sees you, you lose a some health, with {0} healths to start with.".format(
-            self.player.view_health()))
-        print("However, if a doctor happens to be at that location, you can gain a health.")
-        print("Good luck!")
+        text = "Welcome {0.player.name}, the objective is to obtain a chest of gold and take it to " \
+               "the Grand Master at the Coffee Shop".format(self)
+
+        text += "\nYou must do so while trying to avoid goblins, they hide in different locations, " \
+                "and constantly are on the move."
+
+        text += "\nIf a goblin sees you, you lose a some health, with {0} healths to start with."\
+            .format(self.player.view_health())
+
+        text += "\nHowever, if a doctor happens to be at that location, you can gain a health."
+
+        text += "\nGood luck!"
+
+        self.render_text(text)
 
     def print_locs(self):
-        # print(self.locations_print
         text = self.locations_print()
-        print(text)
+        self.render_text(text)
 
         self.user_direction()
 
@@ -99,16 +102,21 @@ class Program:
         return text
 
     def user_direction(self):
-        player_option = input("Direction: ").upper()
+        if self.render:
+            player_option = input("Direction: ").upper()
+        else:
+            player_option = input().upper()
+
         player_option = self.direction_query(player_option)
 
         if player_option is "Q":
-            print("Have a good day!")
-            print()
+            text = "Have a good day! \n \n"
+            self.render_text(text)
             self.loop_break = True
 
         else:
             self.current_location = self.advance_location(player_option)  # moves to next location
+            self.player.add_move()
 
     def direction_query(self, user_input):
         available_keys = []
@@ -136,7 +144,11 @@ class Program:
 
         if problems is True:
             while problems is True:
-                user_input = input("Please enter a valid direction: ").upper()
+                if self.render:
+                    user_input = input("Please enter a valid direction: ").upper()
+                else:
+                    user_input = input().upper()
+
                 if user_input in available_keys:
                     for i in range(0, len(gl.directions)):
                         if user_input in gl.directions[i].values():
@@ -176,18 +188,44 @@ class Program:
         return text
 
     def encountered_stats(self):
-        did_encounter = self.location_health()
+        self.encountered = self.location_health()
         health = self.player.view_health()
         moves = self.player.view_moves()
 
         if health == "0":
             self.loop_break = True
 
-        print()
-        print('-' * 46)
-        print("| Encountered: {0}, Health: {1:2}, Moves: {2:2} |"
-              .format(did_encounter, health, moves))
-        print('-' * 46)
+        text = ("-" * 46)
+        text += "\n| Encountered: {0}, Health: {1:2}, Moves: {2:2} |\n".format(self.encountered, health, moves)
+        text += ("-" * 46)
+        text += " \n"
+
+        self.render_text(text)
+
+    def render_text(self, text):
+        if self.render:
+            print(text)
+
+
+class GameMethods:
+
+    def __init__(self):
+        self.game = Program()
+
+    def reset(self):
+        self.game.player.health = 3
+        self.game.player.moves = 0
+        self.game.current_location = 0
+        self.game.encountered = "Nobody"
+
+    def render(self, status):
+        if status == "off":
+            self.game.render = False
+        elif status == "on":
+            self.game.render = True
+
+    def step(self, action):
+        pass
 
 
 def random_num(max_range):

@@ -3,6 +3,7 @@ import random
 import game_library as gl
 
 locations = gl.locations
+pc = gl.possible_encounters
 
 
 class Player:
@@ -53,19 +54,13 @@ class Player:
 class Program:
 
     def __init__(self):
-        self.player = None
+        self.player = Player("Machine")
         self.current_location = 0
         self.loop_break = False
-        self.encountered = "Nobody"
-        self.render = False
+        self.encountered = 0
+        self.render = True
 
     def init_play(self):
-        name = "Machine"
-        self.player = Player(name)
-
-        self.intro()
-
-    def intro(self):
         text = "Welcome {0.player.name}, the objective is to obtain a chest of gold and take it to " \
                "the Grand Master at the Coffee Shop".format(self)
 
@@ -173,18 +168,19 @@ class Program:
         max_num = locations[self.current_location]["death"]
 
         health_bool = random_num(max_num)
-        text = "Nobody"
+
         if health_bool is True:
-            text = "Goblin"
+            self.encountered = 1
             self.player.effect_health(-1)
 
         else:
             max_num = locations[self.current_location]["heal"]
             health_bool = random_num(max_num)
             if health_bool is True:
-                text = "Doctor"
+                self.encountered = 2
                 self.player.effect_health(1)
 
+        text = pc[self.encountered]
         return text
 
     def encountered_stats(self):
@@ -201,6 +197,7 @@ class Program:
         text += " \n"
 
         self.render_text(text)
+        return self.encountered, health, moves
 
     def render_text(self, text):
         if self.render:
@@ -216,7 +213,9 @@ class GameMethods:
         self.game.player.health = 3
         self.game.player.moves = 0
         self.game.current_location = 0
-        self.game.encountered = "Nobody"
+        self.game.encountered = 0
+        print(self.game.player.health, self.game.player.moves, self.game.current_location, self.game.encountered)
+        return self.game.player.health, self.game.player.moves, self.game.current_location, self.game.encountered
 
     def render(self, status):
         if status == "off":
@@ -226,6 +225,9 @@ class GameMethods:
 
     def step(self, action):
         pass
+
+    def close(self):
+        self.game.loop_break = True
 
 
 def random_num(max_range):

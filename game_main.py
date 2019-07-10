@@ -29,8 +29,8 @@ def main():
         if program.loop_break:
             break
 
-        program.encountered_stats()
-
+        encountered, health, moves = program.encountered_stats()
+        print("end loop")
 
 if __name__ == '__main__':
     main()

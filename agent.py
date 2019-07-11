@@ -16,27 +16,34 @@ games_to_play = 10
 
 for i in range(games_to_play):
     # Reset the env
-    obs = env.reset()  # initialize all vars and prep game to run
+    pack = env.reset()  # initialize all vars and prep game to run
     episode_rewards = 0
     done = False
 
-    current = obs[2]
-    locations = gl.locations[current]["values"]
+    # print("obs: {}, obs[2]: {}".format(pack, pack[2]))
+    current = int(pack[2])
+    locations = []
+    for j in gl.locations[current]["locations"]:
+        if j is not "Q":
+            locations.append(j)
     action = random.choice(locations)
 
     while not done:
-        env.render("on")  # draws frame of the game
+        pack = env.render("on")  # draws frame of the game
 
-        current = obs[2]
-        locations = gl.locations[current]["values"]
+        current = pack
+        locations = []
+        for j in gl.locations[current]["locations"]:
+            if j is not "Q":
+                locations.append(j)
         action = random.choice(locations)
 
         # Take a step in the env with the chosen action
         obs, reward, done, info = env.step(action)
         episode_rewards += reward
-        time.sleep(5)
+        # time.sleep(5)
 
-    print(episode_rewards)  # print total rewards when done
+    print("Total episode rewards: " + str(episode_rewards))  # print total rewards when done
 
 # env.close()  # close the env
 

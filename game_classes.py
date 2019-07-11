@@ -62,14 +62,14 @@ class Program:
         self.loop_break = False
         self.encountered = 0
         self.render = True
-        self.reward = []
+        self.reward = 0.0
 
     def obtained_chest(self):
         if self.current_location == 12:
             text = "You have obtained the chest, hurry to the Coffee Shop! \n "
             self.render_text(text)
             self.player.obtains_chest()
-            self.reward.append(1.0)
+            self.reward += 1.0
 
     def init_play(self):
         text = "Welcome {0.player.name}, the objective is to obtain a chest of gold and take it to " \
@@ -87,11 +87,11 @@ class Program:
 
         self.render_text(text)
 
-    def print_locs(self):
+    def print_locs(self, action):
         text = self.locations_print()
         self.render_text(text)
 
-        available_directions = self.user_direction()
+        available_directions = self.user_direction(action)
         return available_directions
 
     def locations_print(self):
@@ -108,11 +108,15 @@ class Program:
 
         return text
 
-    def user_direction(self):
-        if self.render:
-            player_option = input("Direction: ").upper()
+    def user_direction(self, action):
+        if not self.render:
+            # player_option = input("Direction: ").upper()
+            player_option = action
         else:
-            player_option = input().upper()
+            # player_option = input().upper()
+            player_option = action
+            text = "Directon: {}".format(player_option)
+            self.render_text(text)
 
         player_option, available_directions = self.direction_query(player_option)
 
@@ -150,25 +154,25 @@ class Program:
         if (user_input in available_keys) and (user_input not in available_directions):
             problems = True
 
-        if problems is True:
-            while problems is True:
-                if self.render:
-                    user_input = input("Please enter a valid direction: ").upper()
-                else:
-                    user_input = input().upper()
-
-                if user_input in available_keys:
-                    for i in range(0, len(gl.directions)):
-                        if user_input in gl.directions[i].values():
-                            user_input = gl.directions[i]["short"]
-                            break
-                    problems = False
-                    if user_input in available_directions:
-                        problems = False
-                    else:
-                        problems = True
-                else:
-                    problems = True
+        # if problems is True:
+        #     while problems is True:
+        #         if self.render:
+        #             user_input = input("Please enter a valid direction: ").upper()
+        #         else:
+        #             user_input = input().upper()
+        #
+        #         if user_input in available_keys:
+        #             for i in range(0, len(gl.directions)):
+        #                 if user_input in gl.directions[i].values():
+        #                     user_input = gl.directions[i]["short"]
+        #                     break
+        #             problems = False
+        #             if user_input in available_directions:
+        #                 problems = False
+        #             else:
+        #                 problems = True
+        #         else:
+        #             problems = True
 
         return user_input, available_directions
 
@@ -197,10 +201,10 @@ class Program:
             if health_bool is True:
                 self.encountered = 2
                 self.player.effect_health(1)
-                self.reward.append(1.0)
+                self.reward += 1.0
 
         if passed:
-            self.reward.append(1.0)
+            self.reward += 1.0
 
         text = pc[self.encountered]
 
@@ -237,17 +241,20 @@ class GameMethods:
         self.game.player.moves = 0
         self.game.current_location = 0
         self.game.encountered = 0
-        print(self.game.player.health, self.game.player.moves, self.game.current_location, self.game.encountered)
         return self.game.player.health, self.game.player.moves, self.game.current_location, self.game.encountered
 
     def render(self, status):
+        current = self.game.current_location
+
         if status == "off":
             self.game.render = False
         elif status == "on":
             self.game.render = True
 
+        return current
+
     def step(self, action):
-        encountered, health, moves, available_directions = gm.main(action)
+        encountered, health, moves, available_directions = gm.main(action, self.game)
         obs = [encountered]
         reward = np.array([self.game.reward])
         done = self.game.loop_break

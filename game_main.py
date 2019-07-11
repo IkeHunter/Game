@@ -4,29 +4,29 @@ player = gc.Player()
 program = gc.Program()
 
 
-def main(action):
+def main(action, game):
 
     # if program.current_location == 12:
     #     text = "You have obtained the chest, hurry to the Coffee Shop! \n "
     #     program.render_text(text)
     #     player.obtains_chest()
 
-    program.obtained_chest()
+    game.obtained_chest()
 
-    if (player.has_chest is True) and (program.current_location is 11) and (player.view_health() is not 0):
+    if (game.player.has_chest is True) and (game.current_location is 11) and (game.player.view_health() is not 0):
         text = "You Win! \n "
-        program.render_text(text)
-        program.reward.append(1.0)
-        program.break_loop = True
+        game.render_text(text)
+        game.reward.append(1.0)
+        game.break_loop = True
 
-    if program.loop_break:
+    if game.loop_break:
         text = "You have no more life, you lose \n "
-        program.render_text(text)
-        program.break_loop = True
+        game.render_text(text)
+        game.break_loop = True
 
-    available_directions = program.print_locs()
+    available_directions = game.print_locs(action)
 
-    encountered, health, moves = program.encountered_stats()
+    encountered, health, moves = game.encountered_stats()
 
     return encountered, health, moves, available_directions
 

@@ -15,9 +15,8 @@ def random_agent(env):
         # print("obs: {}, obs[2]: {}".format(pack, pack[2]))
         current = int(pack[2])
         locations = []
-        for j in gl.locations[current]["locations"]:
-            if j is not "Q":
-                locations.append(j)
+        for j in gl.locations[current]["direction_values"]:
+            locations.append(j)
         action = random.choice(locations)
 
         while not done:
@@ -25,9 +24,8 @@ def random_agent(env):
 
             current = pack
             locations = []
-            for j in gl.locations[current]["locations"]:
-                if j is not "Q":
-                    locations.append(j)
+            for j in gl.locations[current]["direction_values"]:
+                locations.append(j)
             action = random.choice(locations)
 
             # Take a step in the env with the chosen action

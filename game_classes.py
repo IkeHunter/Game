@@ -67,19 +67,23 @@ class Program:
         self.render = False
         self.reward = 0.0
         self.max_moves = 20
+        self.has_chest = 0
+        self.has_won = 0
 
     def obtained_chest(self):
         if self.current_location == 12:
             text = "You have obtained the chest, hurry to the Coffee Shop! \n "
             self.render_text(text)
             self.player.obtains_chest()
-            self.reward += 1.0
+            self.reward += 10.0
+            self.has_chest = 1
 
     def player_won(self):
-        if (self.player.has_chest is True) and (self.current_location is 11) and (self.player.view_health() is not 0):
+        if (self.has_chest == 0) and (self.current_location == 11) and (self.player.view_health() is not 0):
             text = "You Win! \n "
             self.render_text(text)
             self.reward *= 2
+            self.has_won = 1
             self.loop_break = True
 
     def init_play(self):
@@ -135,8 +139,12 @@ class Program:
             text = "Have a good day! \n \n"
             self.render_text(text)
             self.loop_break = True
-
+        elif player_option is "X":
+            self.reward -= 5.0
+            self.player.add_move()
+            return available_directions
         else:
+            self.reward += 1.0
             self.current_location = self.advance_location(player_option)  # moves to next location
             self.player.add_move()
             return available_directions
@@ -212,7 +220,7 @@ class Program:
             if health_bool is True:
                 self.encountered = 2
                 self.player.effect_health(1)
-                self.reward += 1.0
+                self.reward += 2.0
 
         if passed:
             self.reward += 1.0
@@ -222,7 +230,7 @@ class Program:
         return text
 
     def encountered_stats(self):
-        self.encountered = self.location_health()
+        things_encountered = self.location_health()
         health = self.player.view_health()
         moves = self.player.view_moves()
 
@@ -230,7 +238,7 @@ class Program:
             self.loop_break = True
 
         text = ("-" * 46)
-        text += "\n| Encountered: {0}, Health: {1:2}, Moves: {2:2} |\n".format(self.encountered, health, moves)
+        text += "\n| Encountered: {0}, Health: {1:2}, Moves: {2:2} |\n".format(things_encountered, health, moves)
         text += ("-" * 46)
         text += " \n"
 
@@ -271,7 +279,10 @@ class GameMethods:
         self.game.current_location = 0
         self.game.encountered = 0
         self.game.loop_break = False
-        return self.game.player.health, self.game.player.moves, self.game.current_location, self.game.encountered
+
+        observations = np.array([self.game.encountered, self.game.has_chest])
+
+        return self.game.player.health, self.game.player.moves, self.game.current_location, observations
 
     def render(self, status):
         current = self.game.current_location
@@ -284,12 +295,15 @@ class GameMethods:
         return current
 
     def step(self, action):
+
+        action = gl.directions[action]["short"]
+
         encountered, health, moves, available_directions = gm.main(action, self.game)
 
         token = self.game.max_moves - int(moves)
         self.game.reward += token
 
-        obs = [encountered]
+        obs = np.array([encountered, self.game.has_chest])
         reward = np.array([self.game.reward])
         done = self.game.loop_break
         info = dict()

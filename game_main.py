@@ -6,34 +6,15 @@ program = gc.Program()
 
 def main(action, game):
 
-    # if program.current_location == 12:
-    #     text = "You have obtained the chest, hurry to the Coffee Shop! \n "
-    #     program.render_text(text)
-    #     player.obtains_chest()
-
     game.obtained_chest()
 
-    if (game.player.has_chest is True) and (game.current_location is 11) and (game.player.view_health() is not 0):
-        text = "You Win! \n "
-        game.render_text(text)
-        game.reward *= 2
-        game.break_loop = True
+    game.player_won()
 
     available_directions = game.print_locs(action)
 
     encountered, health, moves = game.encountered_stats()
 
-    if int(moves) >= game.max_moves:
-        text = "Too many moves!"
-        game.render_text(text)
-        game.reward //= 2
-        game.break_loop = True
-
-    if health == 0:
-        text = "You have no more life, you lose \n "
-        game.render_text(text)
-        game.reward //= 2
-        game.break_loop = True
+    game.check_instance()
 
     return encountered, health, moves, available_directions
 

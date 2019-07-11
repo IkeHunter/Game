@@ -35,4 +35,5 @@ def random_agent(env):
             episode_rewards += reward
             # time.sleep(5)
 
-        print("Total episode rewards: " + str(episode_rewards))  # print total rewards when done
+        print("Total episode rewards: {} \n".format(str(episode_rewards)))  # print total rewards when done
+        print("=" * 40)

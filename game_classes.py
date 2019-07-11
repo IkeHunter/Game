@@ -29,6 +29,9 @@ class Player:
         moves = str(self.moves)
         return moves
 
+    def view_moves_num(self):
+        return self.moves
+
     def effect_health(self, amount):
         if amount < 0:
             if self.health - amount > 0:
@@ -71,6 +74,13 @@ class Program:
             self.render_text(text)
             self.player.obtains_chest()
             self.reward += 1.0
+
+    def player_won(self):
+        if (self.player.has_chest is True) and (self.current_location is 11) and (self.player.view_health() is not 0):
+            text = "You Win! \n "
+            self.render_text(text)
+            self.reward *= 2
+            self.loop_break = True
 
     def init_play(self):
         text = "Welcome {0.player.name}, the objective is to obtain a chest of gold and take it to " \
@@ -227,6 +237,24 @@ class Program:
         self.render_text(text)
         return self.encountered, health, moves
 
+    def check_instance(self):
+
+        moves = self.player.view_moves_num()
+
+        if moves >= self.max_moves:
+            text = "Too many moves!"
+            self.render_text(text)
+            self.reward //= 2
+            self.loop_break = True
+
+        if self.player.health == 0:
+            text = "You have no more life, you lose \n "
+            self.render_text(text)
+            self.reward //= 2
+            self.loop_break = True
+
+        # return self.loop_break
+
     def render_text(self, text):
         if self.render:
             print(text)
@@ -259,6 +287,7 @@ class GameMethods:
         encountered, health, moves, available_directions = gm.main(action, self.game)
 
         token = self.game.max_moves - int(moves)
+        self.game.reward += token
 
         obs = [encountered]
         reward = np.array([self.game.reward])

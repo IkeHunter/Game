@@ -7,7 +7,7 @@ import random
 import time
 
 import game_library as gl
-import game_main as game
+import game_main as gm
 import game_classes as gc
 
 env = gc.GameMethods()
@@ -33,7 +33,6 @@ for i in range(games_to_play):
 
         # Take a step in the env with the chosen action
         obs, reward, done, info = env.step(action)
-        print("obs: {}, reward: {}, done: {}, info: {}".format(obs, reward, done, info))
         episode_rewards += reward
         time.sleep(5)
 

@@ -1,6 +1,9 @@
+import numpy as np
+
 import random
 
 import game_library as gl
+import game_main as gm
 
 locations = gl.locations
 pc = gl.possible_encounters
@@ -59,6 +62,14 @@ class Program:
         self.loop_break = False
         self.encountered = 0
         self.render = True
+        self.reward = []
+
+    def obtained_chest(self):
+        if self.current_location == 12:
+            text = "You have obtained the chest, hurry to the Coffee Shop! \n "
+            self.render_text(text)
+            self.player.obtains_chest()
+            self.reward.append(1.0)
 
     def init_play(self):
         text = "Welcome {0.player.name}, the objective is to obtain a chest of gold and take it to " \
@@ -80,7 +91,8 @@ class Program:
         text = self.locations_print()
         self.render_text(text)
 
-        self.user_direction()
+        available_directions = self.user_direction()
+        return available_directions
 
     def locations_print(self):
         global locations
@@ -102,7 +114,7 @@ class Program:
         else:
             player_option = input().upper()
 
-        player_option = self.direction_query(player_option)
+        player_option, available_directions = self.direction_query(player_option)
 
         if player_option is "Q":
             text = "Have a good day! \n \n"
@@ -112,10 +124,11 @@ class Program:
         else:
             self.current_location = self.advance_location(player_option)  # moves to next location
             self.player.add_move()
+            return available_directions
 
     def direction_query(self, user_input):
-        available_keys = []
-        available_directions = []
+        available_keys = []  # inclusive
+        available_directions = []  # exclusive
         problems = False
 
         for i in gl.directions.values():
@@ -157,7 +170,7 @@ class Program:
                 else:
                     problems = True
 
-        return user_input
+        return user_input, available_directions
 
     def advance_location(self, direction):
         global locations
@@ -165,13 +178,18 @@ class Program:
         return move_to
 
     def location_health(self):
+        passed = True
+
         max_num = locations[self.current_location]["death"]
 
         health_bool = random_num(max_num)
 
+        self.encountered = 0
+
         if health_bool is True:
             self.encountered = 1
             self.player.effect_health(-1)
+            passed = False
 
         else:
             max_num = locations[self.current_location]["heal"]
@@ -179,8 +197,13 @@ class Program:
             if health_bool is True:
                 self.encountered = 2
                 self.player.effect_health(1)
+                self.reward.append(1.0)
+
+        if passed:
+            self.reward.append(1.0)
 
         text = pc[self.encountered]
+
         return text
 
     def encountered_stats(self):
@@ -224,7 +247,14 @@ class GameMethods:
             self.game.render = True
 
     def step(self, action):
-        pass
+        encountered, health, moves, available_directions = gm.main(action)
+        obs = [encountered]
+        reward = np.array([self.game.reward])
+        done = self.game.loop_break
+        info = dict()
+
+        return obs, reward, done, info
+
 
     def close(self):
         self.game.loop_break = True

@@ -61,8 +61,9 @@ class Program:
         self.current_location = 0
         self.loop_break = False
         self.encountered = 0
-        self.render = True
+        self.render = False
         self.reward = 0.0
+        self.max_moves = 20
 
     def obtained_chest(self):
         if self.current_location == 12:
@@ -241,6 +242,7 @@ class GameMethods:
         self.game.player.moves = 0
         self.game.current_location = 0
         self.game.encountered = 0
+        self.game.loop_break = False
         return self.game.player.health, self.game.player.moves, self.game.current_location, self.game.encountered
 
     def render(self, status):
@@ -255,13 +257,15 @@ class GameMethods:
 
     def step(self, action):
         encountered, health, moves, available_directions = gm.main(action, self.game)
+
+        token = self.game.max_moves - int(moves)
+
         obs = [encountered]
         reward = np.array([self.game.reward])
         done = self.game.loop_break
         info = dict()
 
         return obs, reward, done, info
-
 
     def close(self):
         self.game.loop_break = True

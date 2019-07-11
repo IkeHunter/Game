@@ -16,17 +16,24 @@ def main(action, game):
     if (game.player.has_chest is True) and (game.current_location is 11) and (game.player.view_health() is not 0):
         text = "You Win! \n "
         game.render_text(text)
-        game.reward.append(1.0)
-        game.break_loop = True
-
-    if game.loop_break:
-        text = "You have no more life, you lose \n "
-        game.render_text(text)
+        game.reward *= 2
         game.break_loop = True
 
     available_directions = game.print_locs(action)
 
     encountered, health, moves = game.encountered_stats()
+
+    if int(moves) >= game.max_moves:
+        text = "Too many moves!"
+        game.render_text(text)
+        game.reward //= 2
+        game.break_loop = True
+
+    if health == 0:
+        text = "You have no more life, you lose \n "
+        game.render_text(text)
+        game.reward //= 2
+        game.break_loop = True
 
     return encountered, health, moves, available_directions
 

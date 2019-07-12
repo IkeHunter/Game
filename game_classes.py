@@ -76,14 +76,14 @@ class Program:
             text = "You have obtained the chest, hurry to the Coffee Shop! \n "
             self.render_text(text)
             self.player.obtains_chest()
-            self.reward *= 5.0
+            self.reward += 100.0
             self.has_chest = 1
 
     def player_won(self):
         if (self.has_chest == 0) and (self.current_location == 11) and (self.player.view_health_num() > 0):
             text = "You Win! \n "
             self.render_text(text)
-            self.reward *= 10.0
+            self.reward += 500.0
             self.has_won = 1
             self.loop_break = True
 
@@ -139,7 +139,7 @@ class Program:
             self.render_text(text)
             self.loop_break = True
         elif player_option is "X":
-            self.reward //= 2.0
+            self.reward -= 15.0
             self.player.add_move()
             return available_directions
         else:
@@ -174,24 +174,6 @@ class Program:
 
         if problems is True:
             user_input = "X"
-            # while problems is True:
-            #     if self.render:
-            #         user_input = input("Please enter a valid direction: ").upper()
-            #     else:
-            #         user_input = input().upper()
-            #
-            #     if user_input in available_keys:
-            #         for i in range(0, len(gl.directions)):
-            #             if user_input in gl.directions[i].values():
-            #                 user_input = gl.directions[i]["short"]
-            #                 break
-            #         problems = False
-            #         if user_input in available_directions:
-            #             problems = False
-            #         else:
-            #             problems = True
-            #     else:
-            #         problems = True
 
         return user_input, available_directions
 
@@ -254,13 +236,13 @@ class Program:
         if moves >= self.max_moves:
             text = "Too many moves!"
             self.render_text(text)
-            self.reward //= 2
+            self.reward -= 10
             self.loop_break = True
 
         if self.player.health == 0:
             text = "You have no more life, you lose \n "
             self.render_text(text)
-            self.reward //= 2
+            self.reward -= 12
             self.loop_break = True
 
         return self.loop_break
@@ -309,9 +291,13 @@ class GameMethods:
         obs = np.array([encountered, self.game.has_chest])
         reward = np.array([self.game.reward])
         done = self.game.loop_break
+        won = self.game.has_won
         info = dict()
 
         return obs, reward, done, info
+
+    def has_won(self):
+        return self.game.has_won, self.game.has_chest
 
     def close(self):
         self.game.loop_break = True
@@ -406,7 +392,7 @@ class User:
 
         if problems is True:
             while problems is True:
-                self.reward //= 2
+                self.reward -= 15
                 user_input = input("Please enter a valid direction: ").upper()
                 if user_input in available_keys:
                     for i in range(0, len(gl.directions)):

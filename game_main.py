@@ -35,28 +35,28 @@ def player_loop():
 
     while True:
 
-        if program.current_location == 12:
+        if program.current_location == 12 and program.player.has_chest is False:
             print("You have obtained the chest, hurry to the Coffee Shop!")
             print()
             program.player.obtains_chest()
-            program.reward *= 5
+            program.reward += 100
 
         if (program.player.has_chest is True) and (program.current_location is 11) and (program.player.view_health() is not 0):
             print("You win!")
             print()
-            program.reward *= 10
+            program.reward += 500
             break
 
         if program.player.view_moves_num() > program.max_moves:
             print("Too many moves!")
             print()
-            program.reward //= 2
+            program.reward -= 10
             break
 
         if program.loop_break:
             print("You have no more life, you lose")
             print()
-            program.reward //= 2
+            program.reward -= 12
             break
 
         program.print_locs()

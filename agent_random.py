@@ -4,7 +4,7 @@ import game_library as gl
 
 
 def random_agent(env):
-    games_to_play = 10
+    games_to_play = 5
 
     for i in range(games_to_play):
         # Reset the env
@@ -31,7 +31,6 @@ def random_agent(env):
             # Take a step in the env with the chosen action
             obs, reward, done, info = env.step(action)
             episode_rewards += reward
-            # time.sleep(5)
 
         print("Total episode rewards: {} \n".format(str(episode_rewards)))  # print total rewards when done
         print("=" * 40)

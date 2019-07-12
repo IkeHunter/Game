@@ -1,0 +1,100 @@
+Average reward / 2000 eps: 
+nan
+Average reward / 2000 eps: 
+1664.566
+Average reward / 2000 eps: 
+1726.0905
+Average reward / 2000 eps: 
+1687.3505
+Average reward / 2000 eps: 
+1689.4785
+Average reward / 2000 eps: 
+1666.416
+Average reward / 2000 eps: 
+1728.3105
+Average reward / 2000 eps: 
+1649.661
+Average reward / 2000 eps: 
+1687.838
+Average reward / 2000 eps: 
+1665.3105
+Average reward / 2000 eps: 
+1755.702
+Average reward / 2000 eps: 
+1714.869
+Average reward / 2000 eps: 
+1731.966
+Average reward / 2000 eps: 
+1709.0925
+Average reward / 2000 eps: 
+1767.4985
+Average reward / 2000 eps: 
+1673.7815
+Average reward / 2000 eps: 
+1713.2085
+Average reward / 2000 eps: 
+1671.7375
+Average reward / 2000 eps: 
+1719.5425
+Average reward / 2000 eps: 
+1753.1045
+Average reward / 2000 eps: 
+1766.0285
+Average reward / 2000 eps: 
+1706.349
+Average reward / 2000 eps: 
+1725.4145
+Average reward / 2000 eps: 
+1753.8965
+Average reward / 2000 eps: 
+1757.031
+Average reward / 2000 eps: 
+1696.4675
+Average reward / 2000 eps: 
+1751.431
+Average reward / 2000 eps: 
+1773.261
+Average reward / 2000 eps: 
+1783.3825
+Average reward / 2000 eps: 
+1856.482
+Average reward / 2000 eps: 
+1719.3465
+Average reward / 2000 eps: 
+1776.037
+Average reward / 2000 eps: 
+1696.677
+Average reward / 2000 eps: 
+1723.1215
+Average reward / 2000 eps: 
+1797.844
+Average reward / 2000 eps: 
+1748.983
+Average reward / 2000 eps: 
+1818.6665
+Average reward / 2000 eps: 
+1897.539
+Average reward / 2000 eps: 
+1842.683
+Average reward / 2000 eps: 
+1830.023
+Average reward / 2000 eps: 
+1827.525
+Average reward / 2000 eps: 
+1853.0545
+Average reward / 2000 eps: 
+1817.717
+Average reward / 2000 eps: 
+1822.155
+Average reward / 2000 eps: 
+1762.719
+Average reward / 2000 eps: 
+1906.2945
+Average reward / 2000 eps: 
+1886.33
+Average reward / 2000 eps: 
+1913.119
+Average reward / 2000 eps: 
+1807.615
+Average reward / 2000 eps: 
+1874.7785

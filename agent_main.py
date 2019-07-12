@@ -1,12 +1,9 @@
 import tensorflow as tf
-import matplotlib.pyplot as plt
 import numpy as np
 
 import os
-import random
 
 import game_classes as gc
-from agent_random import random_agent
 from agent_class import Agent
 import game_library as gl
 
@@ -36,13 +33,13 @@ def neural_network_loop():
     num_actions = 4
     state_size = 2
 
-    index = 1
+    index = 2
 
     path = "./text_adventure_{}/".format(index)  # for checkpoints
 
     training_episodes = 100000  # 1000
     max_steps_per_episode = 1000  # 5000
-    episode_batch_size = 5
+    episode_batch_size = 64
 
     agent = Agent(num_actions, state_size)
 
@@ -57,6 +54,7 @@ def neural_network_loop():
         sess.run(init)
 
         total_episode_rewards = []
+        amt_wins = []
 
         gradient_buffer = sess.run(tf.trainable_variables())
 
@@ -99,6 +97,14 @@ def neural_network_loop():
                 # Save the resulting states, rewards and whether the episode finished
                 state_next, reward, done, _ = env.step(action_choice)
 
+                has_won, has_chest = env.has_won()
+
+                if has_won is True:
+                    amt_wins.append("Has Won")
+
+                if has_chest is True:
+                    amt_wins.append("Has Chest")
+
                 episode_history.append([[state], action_choice, reward, state_next])
                 state = state_next
 
@@ -137,42 +143,43 @@ def neural_network_loop():
                     for index, gradient in enumerate(gradient_buffer):
                         gradient_buffer[index] = gradient * 0
 
-                    if episode % 2000 == 0:
-                        saver.save(sess, path + "pg-checkpoint", episode)
+                if episode % 2000 == 0 and step == 1:
+                    saver.save(sess, path + "pg-checkpoint", episode)
+                    print("Average reward / 2000 eps: " + str(np.mean(total_episode_rewards[-2000:])))
+                    with open("logs.txt", "a") as log_file:
+                        print("Average reward / 2000 eps: \n" + str(np.mean(total_episode_rewards[-2000:])), file=log_file)
 
-                        print("Average reward / 2000 eps: " + str(np.mean(total_episode_rewards[-2000:])))
-
-    print("Now Testing neural network... \n")
-    testing_episodes = 2
-
-    with tf.Session() as sess:
-        checkpoint = tf.train.get_checkpoint_state(path)
-        saver.restore(sess, checkpoint.model_checkpoint_path)
-
-        for episode in range(testing_episodes):
-
-            state_all = env.reset()
-
-            state = state_all[3]
-
-            state = np.reshape(state, [1, state_size])
-
-            episode_rewards = 0
-
-            for step in range(max_steps_per_episode):
-                env.render("on")
-
-                # Get Action
-                action_argmax = sess.run(agent.choice, feed_dict={agent.input_layer: [state]})
-                action_choice = action_argmax[0]
-
-                state_next, reward, done, _ = env.step(action_choice)
-                state = state_next
-
-                episode_rewards += reward
-
-                if done or step + 1 == max_steps_per_episode:
-                    print("Rewards for episode " + str(episode) + ": " + str(episode_rewards))
-                break
+    # print("Now Testing neural network... \n")
+    # testing_episodes = 2
+    #
+    # with tf.Session() as sess:
+    #     checkpoint = tf.train.get_checkpoint_state(path)
+    #     saver.restore(sess, checkpoint.model_checkpoint_path)
+    #
+    #     for episode in range(testing_episodes):
+    #
+    #         state_all = env.reset()
+    #
+    #         state = state_all[3]
+    #
+    #         state = np.reshape(state, [1, state_size])
+    #
+    #         episode_rewards = 0
+    #
+    #         for step in range(max_steps_per_episode):
+    #             env.render("on")
+    #
+    #             # Get Action
+    #             action_argmax = sess.run(agent.choice, feed_dict={agent.input_layer: [state]})
+    #             action_choice = action_argmax[0]
+    #
+    #             state_next, reward, done, _ = env.step(action_choice)
+    #             state = state_next
+    #
+    #             episode_rewards += reward
+    #
+    #             if done or step + 1 == max_steps_per_episode:
+    #                 print("Rewards for episode " + str(episode) + ": " + str(episode_rewards))
+    #             break
 
 

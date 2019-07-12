@@ -23,13 +23,13 @@ class Agent:
         hidden_layer_1 = tf.layers.dense(self.input_layer, 8, activation=tf.nn.relu, kernel_initializer=initializer)
         hidden_layer_2 = tf.layers.dense(hidden_layer_1, 8, activation=tf.nn.relu, kernel_initializer=initializer)
 
-        conv_layer_1 = tf.layers.conv1d(hidden_layer_2, filters=32, kernel_size=3, padding="same", activation=tf.nn.relu)
+        conv_layer_1 = tf.layers.conv1d(hidden_layer_2, filters=32, kernel_size=4, padding="same", activation=tf.nn.relu)
         pooling_layer_1 = tf.layers.max_pooling1d(conv_layer_1, pool_size=1, strides=1)
 
-        conv_layer_2 = tf.layers.conv1d(pooling_layer_1, filters=32, kernel_size=2, padding="same", activation=tf.nn.relu)
+        conv_layer_2 = tf.layers.conv1d(pooling_layer_1, filters=32, kernel_size=3, padding="same", activation=tf.nn.relu)
         pooling_layer_2 = tf.layers.max_pooling1d(conv_layer_2, pool_size=1, strides=2)
 
-        conv_layer_3 = tf.layers.conv1d(pooling_layer_2, filters=32, kernel_size=2, padding="same", activation=tf.nn.relu)
+        conv_layer_3 = tf.layers.conv1d(pooling_layer_2, filters=32, kernel_size=3, padding="same", activation=tf.nn.relu)
         pooling_layer_3 = tf.layers.max_pooling1d(conv_layer_3, pool_size=1, strides=2)
 
         flattened_pooling = tf.layers.flatten(pooling_layer_3)
@@ -62,25 +62,10 @@ class Agent:
 
         # Create the operation to update gradients with the gradients placeholder...
 
-        optimizer = tf.train.AdamOptimizer(learning_rate=1e-3)
+        optimizer = tf.train.AdamOptimizer(learning_rate=1e-5)
         # Update gradients operation applies gradients that were fed into the corresponding trainable vars in the model
         # Operation runs every time model needs to appy what it has learned from its games and update its parameters
         self.update_gradients = optimizer.apply_gradients(zip(self.gradients_to_apply, tf.trainable_variables()))
-
-    # def discount_normalize_rewards(self, rewards):
-    #
-    #     self.discounted_rewards = np.zeros_like(rewards)
-    #     total_rewards = 0
-    #
-    #     for i in reversed(range(len(rewards))):
-    #         total_rewards = total_rewards * self.discount_rate + rewards[i]
-    #         self.discounted_rewards[i] = total_rewards
-    #
-    #     # Normalize rewards across multiple game lengths
-    #     self.discounted_rewards -= np.mean(self.discounted_rewards)
-    #     self.discounted_rewards /= np.std(self.discounted_rewards)
-    #
-    #     return self.discounted_rewards
 
     def random_agent(self):
         games_to_play = 10

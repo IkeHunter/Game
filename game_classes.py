@@ -140,7 +140,7 @@ class Program:
             self.render_text(text)
             self.loop_break = True
         elif player_option is "X":
-            self.reward -= 5.0
+            self.reward //= 2.0
             self.player.add_move()
             return available_directions
         else:
@@ -173,25 +173,26 @@ class Program:
         if (user_input in available_keys) and (user_input not in available_directions):
             problems = True
 
-        # if problems is True:
-        #     while problems is True:
-        #         if self.render:
-        #             user_input = input("Please enter a valid direction: ").upper()
-        #         else:
-        #             user_input = input().upper()
-        #
-        #         if user_input in available_keys:
-        #             for i in range(0, len(gl.directions)):
-        #                 if user_input in gl.directions[i].values():
-        #                     user_input = gl.directions[i]["short"]
-        #                     break
-        #             problems = False
-        #             if user_input in available_directions:
-        #                 problems = False
-        #             else:
-        #                 problems = True
-        #         else:
-        #             problems = True
+        if problems is True:
+            user_input = "X"
+            # while problems is True:
+            #     if self.render:
+            #         user_input = input("Please enter a valid direction: ").upper()
+            #     else:
+            #         user_input = input().upper()
+            #
+            #     if user_input in available_keys:
+            #         for i in range(0, len(gl.directions)):
+            #             if user_input in gl.directions[i].values():
+            #                 user_input = gl.directions[i]["short"]
+            #                 break
+            #         problems = False
+            #         if user_input in available_directions:
+            #             problems = False
+            #         else:
+            #             problems = True
+            #     else:
+            #         problems = True
 
         return user_input, available_directions
 

@@ -10,29 +10,19 @@ from agent_random import random_agent
 from agent_class import Agent
 import game_library as gl
 
-env = gc.GameMethods()
-
-# random_agent(env)  # toggle to test game
-
-
 tf.reset_default_graph()
 
-# Modify to match shape of actions and states in the env
+env = gc.GameMethods()
 
-all_locations = []
-
-for i in range(0, 4):
-    all_locations.append(gl.directions[i])
-
-num_actions = 3
+num_actions = 4
 state_size = 2
 
 index = 1
 
 path = "./text_adventure_{}/".format(index)  # for checkpoints
 
-training_episodes = 1000  # 1000
-max_steps_per_episode = 5000  # 5000
+training_episodes = 100000  # 1000
+max_steps_per_episode = 1000  # 5000
 episode_batch_size = 5
 
 agent = Agent(num_actions, state_size)
@@ -58,6 +48,8 @@ with tf.Session() as sess:
         state_all = env.reset()
 
         state = state_all[3]
+        new_state = [state]
+        # print("state: {}, state.shape: {}".format(str(state), str(state.shape)))
 
         agent.num_actions = 3
 
@@ -66,19 +58,23 @@ with tf.Session() as sess:
 
         for step in range(max_steps_per_episode):
 
-            if (episode % 100 == 0) and (episode is not 0):
+            if (episode % 5000 == 0) and (episode is not 0):
                 print("Currently on episode " + str(episode))
                 training_current = env.render("on")
             else:
                 training_current = env.render("off")
 
-            if (step % 100 == 0) and (step is not 0):
+            if (step % 1000 == 0) and (step is not 0):
                 print("Currently on step " + str(step))
 
-            current = training_current
+            # current = training_current
+            # locations = []
+            # for j in gl.locations[current]["direction_values"]:
+            #     locations.append(j)
+
             locations = []
-            for j in gl.locations[current]["direction_values"]:
-                locations.append(j)
+            for i in gl.directions:
+                locations.append(i)
 
             locations = np.array(locations)
 
@@ -123,5 +119,36 @@ with tf.Session() as sess:
                 saver.save(sess, path + "pg-checkpoint", episode)
 
                 print("Average reward / 100 eps: " + str(np.mean(total_episode_rewards[-100:])))
-#
+
+print("Now Testing neural network... \n")
+testing_episodes = 2
+
+with tf.Session() as sess:
+    checkpoint = tf.train.get_checkpoint_state(path)
+    saver.restore(sess, checkpoint.model_checkpoint_path)
+
+    for episode in range(testing_episodes):
+
+        state_all = env.reset()
+
+        state = state_all[3]
+
+        episode_rewards = 0
+
+        for step in range(max_steps_per_episode):
+            env.render("on")
+
+            # Get Action
+            action_argmax = sess.run(agent.choice, feed_dict={agent.input_layer: [state]})
+            action_choice = action_argmax[0]
+
+            state_next, reward, done, _ = env.step(action_choice)
+            state = state_next
+
+            episode_rewards += reward
+
+            if done or step + 1 == max_steps_per_episode:
+                print("Rewards for episode " + str(episode) + ": " + str(episode_rewards))
+                break
+
 

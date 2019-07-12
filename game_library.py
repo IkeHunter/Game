@@ -3,9 +3,9 @@ directions = {
     1: {"short": "E", "long": "EAST"},
     2: {"short": "S", "long": "SOUTH"},
     3: {"short": "W", "long": "WEST"},
-    4: {"short": "Q", "long": "QUIT"},
-    5: {"short": "X", "long": "WRONG"},
-    6: {"short": "X", "long": "WRONG"}
+    # 4: {"short": "Q", "long": "QUIT"},
+    # 5: {"short": "X", "long": "WRONG"},
+    # 6: {"short": "X", "long": "WRONG"}
 }
 
 locations = {
@@ -45,3 +45,4 @@ possible_encounters = {
     1: "Goblin",
     2: "Doctor"
 }
+

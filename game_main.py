@@ -18,7 +18,6 @@ def main(action, game):
 
     return encountered, health, moves, available_directions
 
-
 # def main_looped():
 #
 #     program.init_play()

@@ -62,7 +62,7 @@ class Agent:
 
         # Create the operation to update gradients with the gradients placeholder...
 
-        optimizer = tf.train.AdamOptimizer(learning_rate=1e-2)
+        optimizer = tf.train.AdamOptimizer(learning_rate=1e-3)
         # Update gradients operation applies gradients that were fed into the corresponding trainable vars in the model
         # Operation runs every time model needs to appy what it has learned from its games and update its parameters
         self.update_gradients = optimizer.apply_gradients(zip(self.gradients_to_apply, tf.trainable_variables()))

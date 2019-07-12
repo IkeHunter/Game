@@ -28,184 +28,151 @@ def discount_normalize_rewards(rewards):
     return discounted_rewards
 
 
-tf.reset_default_graph()
+def neural_network_loop():
+    tf.reset_default_graph()
 
-env = gc.GameMethods()
+    env = gc.GameMethods()
 
-num_actions = 4
-state_size = 2
+    num_actions = 4
+    state_size = 2
 
-index = 1
+    index = 1
 
-path = "./text_adventure_{}/".format(index)  # for checkpoints
+    path = "./text_adventure_{}/".format(index)  # for checkpoints
 
-training_episodes = 100000  # 1000
-max_steps_per_episode = 1000  # 5000
-episode_batch_size = 5
+    training_episodes = 100000  # 1000
+    max_steps_per_episode = 1000  # 5000
+    episode_batch_size = 5
 
-agent = Agent(num_actions, state_size)
+    agent = Agent(num_actions, state_size)
 
-init = tf.global_variables_initializer()
+    init = tf.global_variables_initializer()
 
-saver = tf.train.Saver(max_to_keep=2)
+    saver = tf.train.Saver(max_to_keep=2)
 
-if not os.path.exists(path):
-    os.makedirs(path)
+    if not os.path.exists(path):
+        os.makedirs(path)
 
-with tf.Session() as sess:
-    sess.run(init)
+    with tf.Session() as sess:
+        sess.run(init)
 
-    total_episode_rewards = []
+        total_episode_rewards = []
 
-    gradient_buffer = sess.run(tf.trainable_variables())
+        gradient_buffer = sess.run(tf.trainable_variables())
 
-    for index, gradient in enumerate(gradient_buffer):
-        gradient_buffer[index] = gradient * 0
+        for index, gradient in enumerate(gradient_buffer):
+            gradient_buffer[index] = gradient * 0
 
-    for episode in range(training_episodes):
-        state_all = env.reset()
+        for episode in range(training_episodes):
+            state_all = env.reset()
 
-        state = state_all[3]
-
-        state = np.reshape(state, [1, state_size])
-
-        agent.num_actions = 3
-
-        episode_history = []
-        episode_rewards = 0
-
-        for step in range(max_steps_per_episode):
-
-            if (episode % 5000 == 0) and (episode is not 0):
-                print("Currently on episode " + str(episode))
-                training_current = env.render("on")
-            else:
-                training_current = env.render("off")
-
-            if (step % 1000 == 0) and (step is not 0):
-                print("Currently on step " + str(step))
-
-            # current = training_current
-            # locations = []
-            # for j in gl.locations[current]["direction_values"]:
-            #     locations.append(j)
-
-            locations = []
-            for i in gl.directions:
-                locations.append(i)
-
-            locations = np.array(locations)
-            # print("locations: {0}, shape: {1}".format(str(locations), str(locations.shape)))
-            # locations = np.reshape(locations, [1, 4])
-
-            action_probabilities = sess.run(agent.outputs, feed_dict={agent.input_layer: [state]})
-
-            action_choice = np.random.choice(locations, p=action_probabilities[0])
-
-            # Save the resulting states, rewards and whether the episode finished
-            state_next, reward, done, _ = env.step(action_choice)
-
-            episode_history.append([state, action_choice, reward, state_next])
-            state = state_next
+            state = state_all[3]
 
             state = np.reshape(state, [1, state_size])
 
-            # print("state: {}, state shape: {}".format(str(state), str(state.shape)))
+            agent.num_actions = 3
 
-            episode_rewards += reward
+            episode_history = []
+            episode_rewards = 0
 
-            if done or step + 1 == max_steps_per_episode:
-                total_episode_rewards.append(episode_rewards)
-                episode_history = np.array(episode_history)
+            for step in range(max_steps_per_episode):
 
-                # normalize rewards fn on the stored rewards in episode history
-                episode_history[:, 2] = discount_normalize_rewards(episode_history[:, 2])
+                if (episode % 5000 == 0) and (episode is not 0):
+                    print("Currently on episode " + str(episode))
+                    training_current = env.render("on")
+                else:
+                    training_current = env.render("off")
 
-                # print("episode_history: \n{},\nformated: \n{},\nshape: \n{}\n".format(episode_history, episode_history[:, 2], episode_history[:, 2].shape))
-                eh0 = episode_history[:, 0]
-                # print("[1] eh0: {}, eh0 shape: {}".format(eh0, eh0.shape))
-                # eh0_list = []
-                # for i in range(eh0.size):
-                #     eh0_list.append(eh0[i])
-                # print("[2] eh0: {}, eh0 shape: {}".format(eh0_list, eh0.shape))
-                eh0 = np.reshape(eh0, [eh0.size, 1])
-                # eh0 = np.reshape(eh0, [eh0.size, 1, 2])
-                # print("[3] eh0: {}, eh0 shape: {}".format(eh0, eh0.shape))
-                # print("Shape: " + str(episode_history[:, 0].shape))
-                eh2 = []
-                # print(eh2[0][0])
-                for i in range(episode_history[:, 2].size):
-                    eh2.append(episode_history[:, 2][i][0])
+                if (step % 1000 == 0) and (step is not 0):
+                    print("Currently on step " + str(step))
 
-                eh2 = np.array(eh2)
-                eh2 = np.resize(eh2, [eh2.size, ])
+                locations = []
+                for i in gl.directions:
+                    locations.append(i)
 
-                eh1 = episode_history[:, 1]
-                # eh2 = episode_history[:, 2]
-                eh1_list = []
-                types = []
-                for i in range(eh1.size):
-                    eh1_list.append(int(eh1[i]))
-                    types.append(type(eh1[i]))
-                eh1 = np.reshape(eh1, [eh1.size, ])
-                # print("eh0: {}, eh0 shape: {}".format(eh0[0][0], eh0.shape))
-                # print("eh1: {}, shape: {}, type: {}".format(str(eh1), str(eh1.shape), types))
-                # print("eh2: {}, eh2 shape: {}".format(eh2, eh2.shape))
+                locations = np.array(locations)
 
-                # ep_gradients = sess.run(agent.gradients,
-                #                         feed_dict={agent.input_layer: np.vstack(eh0),
-                #                                    agent.actions: eh1,
-                #                                    agent.rewards: eh2})
+                action_probabilities = sess.run(agent.outputs, feed_dict={agent.input_layer: [state]})
 
-                # # add the gradients
-                # for index, gradient in enumerate(ep_gradients):
-                #     gradient_buffer[index] += gradient
+                action_choice = np.random.choice(locations, p=action_probabilities[0])
 
-                break
-        if episode % episode_batch_size == 0:
-            feed_dict_gradients = dict(zip(agent.gradients_to_apply, gradient_buffer))
+                # Save the resulting states, rewards and whether the episode finished
+                state_next, reward, done, _ = env.step(action_choice)
 
-            sess.run(agent.update_gradients, feed_dict=feed_dict_gradients)
+                episode_history.append([[state], action_choice, reward, state_next])
+                state = state_next
 
-            for index, gradient in enumerate(gradient_buffer):
-                gradient_buffer[index] = gradient * 0
+                state = np.reshape(state, [1, state_size])
 
-            if episode % 100 == 0:
-                saver.save(sess, path + "pg-checkpoint", episode)
+                # print("state: {}, state shape: {}".format(str(state), str(state.shape)))
 
-                print("Average reward / 100 eps: " + str(np.mean(total_episode_rewards[-100:])))
+                episode_rewards += reward
 
-print("Now Testing neural network... \n")
-testing_episodes = 2
+                if done or step + 1 == max_steps_per_episode:
+                    total_episode_rewards.append(episode_rewards)
+                    episode_history = np.array(episode_history)
 
-with tf.Session() as sess:
-    checkpoint = tf.train.get_checkpoint_state(path)
-    saver.restore(sess, checkpoint.model_checkpoint_path)
+                    # normalize rewards fn on the stored rewards in episode history
+                    episode_history[:, 2] = discount_normalize_rewards(episode_history[:, 2])
 
-    for episode in range(testing_episodes):
+                    eh0 = episode_history[:, 0]
+                    eh1 = episode_history[:, 1]
+                    eh2 = episode_history[:, 2]
 
-        state_all = env.reset()
+                    ep_gradients = sess.run(agent.gradients,
+                                            feed_dict={agent.input_layer: np.vstack(eh0),
+                                                       agent.actions: eh1,
+                                                       agent.rewards: eh2})
 
-        state = state_all[3]
+                    # add the gradients
+                    for index, gradient in enumerate(ep_gradients):
+                        gradient_buffer[index] += gradient
 
-        state = np.reshape(state, [1, state_size])
+                    break
+                if episode % episode_batch_size == 0 and step == 1:
+                    feed_dict_gradients = dict(zip(agent.gradients_to_apply, gradient_buffer))
 
-        episode_rewards = 0
+                    sess.run(agent.update_gradients, feed_dict=feed_dict_gradients)
 
-        for step in range(max_steps_per_episode):
-            env.render("on")
+                    for index, gradient in enumerate(gradient_buffer):
+                        gradient_buffer[index] = gradient * 0
 
-            # Get Action
-            action_argmax = sess.run(agent.choice, feed_dict={agent.input_layer: [state]})
-            action_choice = action_argmax[0]
+                    if episode % 2000 == 0:
+                        saver.save(sess, path + "pg-checkpoint", episode)
 
-            state_next, reward, done, _ = env.step(action_choice)
-            state = state_next
+                        print("Average reward / 2000 eps: " + str(np.mean(total_episode_rewards[-2000:])))
 
-            episode_rewards += reward
+    print("Now Testing neural network... \n")
+    testing_episodes = 2
 
-            if done or step + 1 == max_steps_per_episode:
-                print("Rewards for episode " + str(episode) + ": " + str(episode_rewards))
+    with tf.Session() as sess:
+        checkpoint = tf.train.get_checkpoint_state(path)
+        saver.restore(sess, checkpoint.model_checkpoint_path)
+
+        for episode in range(testing_episodes):
+
+            state_all = env.reset()
+
+            state = state_all[3]
+
+            state = np.reshape(state, [1, state_size])
+
+            episode_rewards = 0
+
+            for step in range(max_steps_per_episode):
+                env.render("on")
+
+                # Get Action
+                action_argmax = sess.run(agent.choice, feed_dict={agent.input_layer: [state]})
+                action_choice = action_argmax[0]
+
+                state_next, reward, done, _ = env.step(action_choice)
+                state = state_next
+
+                episode_rewards += reward
+
+                if done or step + 1 == max_steps_per_episode:
+                    print("Rewards for episode " + str(episode) + ": " + str(episode_rewards))
                 break
 
 

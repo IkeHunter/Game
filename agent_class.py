@@ -20,8 +20,8 @@ class Agent:
         # Neural net starts here...
 
         # creates a hidden layer connected to input layer with 8 units, relu activation, and the xavier initializer
-        hidden_layer_1 = tf.layers.dense(self.input_layer, 2, activation=tf.nn.relu, kernel_initializer=initializer)
-        hidden_layer_2 = tf.layers.dense(hidden_layer_1, 2, activation=tf.nn.relu, kernel_initializer=initializer)
+        hidden_layer_1 = tf.layers.dense(self.input_layer, 8, activation=tf.nn.relu, kernel_initializer=initializer)
+        hidden_layer_2 = tf.layers.dense(hidden_layer_1, 8, activation=tf.nn.relu, kernel_initializer=initializer)
 
         conv_layer_1 = tf.layers.conv1d(hidden_layer_2, filters=32, kernel_size=3, padding="same", activation=tf.nn.relu)
         pooling_layer_1 = tf.layers.max_pooling1d(conv_layer_1, pool_size=1, strides=1)
@@ -43,8 +43,8 @@ class Agent:
         self.choice = tf.argmax(self.outputs, axis=1)
         # ' axis=1 ' indicates maximum value of axis 1(action weights) is wanted
 
-        self.rewards = tf.placeholder(shape=[None, ], dtype=tf.float32)
-        self.actions = tf.placeholder(shape=[None, ], dtype=tf.int32)
+        self.rewards = tf.placeholder(shape=[None, ], dtype=tf.float32)  # float32
+        self.actions = tf.placeholder(shape=[None, ], dtype=tf.int64)  # int64
 
         one_hot_actions = tf.one_hot(self.actions, self.num_actions)
 
@@ -62,7 +62,7 @@ class Agent:
 
         # Create the operation to update gradients with the gradients placeholder...
 
-        optimizer = tf.train.AdamOptimizer(learning_rate=1e-3)
+        optimizer = tf.train.AdamOptimizer(learning_rate=1e-2)
         # Update gradients operation applies gradients that were fed into the corresponding trainable vars in the model
         # Operation runs every time model needs to appy what it has learned from its games and update its parameters
         self.update_gradients = optimizer.apply_gradients(zip(self.gradients_to_apply, tf.trainable_variables()))

@@ -66,7 +66,7 @@ class Program:
         self.encountered = 0
         self.render = False
         self.reward = 0.0
-        self.max_moves = 20
+        self.max_moves = 30
         self.has_chest = 0
         self.has_won = 0
 
@@ -75,14 +75,14 @@ class Program:
             text = "You have obtained the chest, hurry to the Coffee Shop! \n "
             self.render_text(text)
             self.player.obtains_chest()
-            self.reward += 10.0
+            self.reward *= 5.0
             self.has_chest = 1
 
     def player_won(self):
         if (self.has_chest == 0) and (self.current_location == 11) and (self.player.view_health() is not 0):
             text = "You Win! \n "
             self.render_text(text)
-            self.reward *= 2
+            self.reward *= 10.0
             self.has_won = 1
             self.loop_break = True
 

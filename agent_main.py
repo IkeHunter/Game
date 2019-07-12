@@ -123,7 +123,14 @@ with tf.Session() as sess:
 
                 # print("episode_history: \n{},\nformated: \n{},\nshape: \n{}\n".format(episode_history, episode_history[:, 2], episode_history[:, 2].shape))
                 eh0 = episode_history[:, 0]
+                # print("[1] eh0: {}, eh0 shape: {}".format(eh0, eh0.shape))
+                # eh0_list = []
+                # for i in range(eh0.size):
+                #     eh0_list.append(eh0[i])
+                # print("[2] eh0: {}, eh0 shape: {}".format(eh0_list, eh0.shape))
                 eh0 = np.reshape(eh0, [eh0.size, 1])
+                # eh0 = np.reshape(eh0, [eh0.size, 1, 2])
+                # print("[3] eh0: {}, eh0 shape: {}".format(eh0, eh0.shape))
                 # print("Shape: " + str(episode_history[:, 0].shape))
                 eh2 = []
                 # print(eh2[0][0])
@@ -132,15 +139,27 @@ with tf.Session() as sess:
 
                 eh2 = np.array(eh2)
                 eh2 = np.resize(eh2, [eh2.size, ])
-                # print("eh2: {}, eh2 shape: {}".format(eh2, eh2.shape))
-                ep_gradients = sess.run(agent.gradients,
-                                        feed_dict={agent.input_layer: np.vstack(eh0),
-                                                   agent.actions: episode_history[:, 1],
-                                                   agent.rewards: eh2})
 
-                # add the gradients
-                for index, gradient in enumerate(ep_gradients):
-                    gradient_buffer[index] += gradient
+                eh1 = episode_history[:, 1]
+                # eh2 = episode_history[:, 2]
+                eh1_list = []
+                types = []
+                for i in range(eh1.size):
+                    eh1_list.append(int(eh1[i]))
+                    types.append(type(eh1[i]))
+                eh1 = np.reshape(eh1, [eh1.size, ])
+                # print("eh0: {}, eh0 shape: {}".format(eh0[0][0], eh0.shape))
+                # print("eh1: {}, shape: {}, type: {}".format(str(eh1), str(eh1.shape), types))
+                # print("eh2: {}, eh2 shape: {}".format(eh2, eh2.shape))
+
+                # ep_gradients = sess.run(agent.gradients,
+                #                         feed_dict={agent.input_layer: np.vstack(eh0),
+                #                                    agent.actions: eh1,
+                #                                    agent.rewards: eh2})
+
+                # # add the gradients
+                # for index, gradient in enumerate(ep_gradients):
+                #     gradient_buffer[index] += gradient
 
                 break
         if episode % episode_batch_size == 0:

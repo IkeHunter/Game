@@ -10,6 +10,24 @@ from agent_random import random_agent
 from agent_class import Agent
 import game_library as gl
 
+discount_rate = 0.95
+
+
+def discount_normalize_rewards(rewards):
+    discounted_rewards = np.zeros_like(rewards)
+    total_rewards = 0
+
+    for j in reversed(range(len(rewards))):
+        total_rewards = total_rewards * discount_rate + rewards[j]
+        discounted_rewards[j] = total_rewards
+
+    # Normalize rewards across multiple game lengths
+    discounted_rewards -= np.mean(discounted_rewards)
+    discounted_rewards /= np.std(discounted_rewards)
+
+    return discounted_rewards
+
+
 tf.reset_default_graph()
 
 env = gc.GameMethods()
@@ -48,8 +66,8 @@ with tf.Session() as sess:
         state_all = env.reset()
 
         state = state_all[3]
-        new_state = [state]
-        # print("state: {}, state.shape: {}".format(str(state), str(state.shape)))
+
+        state = np.reshape(state, [1, state_size])
 
         agent.num_actions = 3
 
@@ -77,6 +95,8 @@ with tf.Session() as sess:
                 locations.append(i)
 
             locations = np.array(locations)
+            # print("locations: {0}, shape: {1}".format(str(locations), str(locations.shape)))
+            # locations = np.reshape(locations, [1, 4])
 
             action_probabilities = sess.run(agent.outputs, feed_dict={agent.input_layer: [state]})
 
@@ -88,6 +108,10 @@ with tf.Session() as sess:
             episode_history.append([state, action_choice, reward, state_next])
             state = state_next
 
+            state = np.reshape(state, [1, state_size])
+
+            # print("state: {}, state shape: {}".format(str(state), str(state.shape)))
+
             episode_rewards += reward
 
             if done or step + 1 == max_steps_per_episode:
@@ -95,12 +119,24 @@ with tf.Session() as sess:
                 episode_history = np.array(episode_history)
 
                 # normalize rewards fn on the stored rewards in episode history
-                episode_history[:, 2] = agent.discount_normalize_rewards(episode_history[:, 2])
+                episode_history[:, 2] = discount_normalize_rewards(episode_history[:, 2])
 
+                # print("episode_history: \n{},\nformated: \n{},\nshape: \n{}\n".format(episode_history, episode_history[:, 2], episode_history[:, 2].shape))
+                eh0 = episode_history[:, 0]
+                eh0 = np.reshape(eh0, [eh0.size, 1])
+                # print("Shape: " + str(episode_history[:, 0].shape))
+                eh2 = []
+                # print(eh2[0][0])
+                for i in range(episode_history[:, 2].size):
+                    eh2.append(episode_history[:, 2][i][0])
+
+                eh2 = np.array(eh2)
+                eh2 = np.resize(eh2, [eh2.size, ])
+                # print("eh2: {}, eh2 shape: {}".format(eh2, eh2.shape))
                 ep_gradients = sess.run(agent.gradients,
-                                        feed_dict={agent.input_layer: np.vstack(episode_history[:, 0]),
+                                        feed_dict={agent.input_layer: np.vstack(eh0),
                                                    agent.actions: episode_history[:, 1],
-                                                   agent.rewards: episode_history[:, 2]})
+                                                   agent.rewards: eh2})
 
                 # add the gradients
                 for index, gradient in enumerate(ep_gradients):
@@ -132,6 +168,8 @@ with tf.Session() as sess:
         state_all = env.reset()
 
         state = state_all[3]
+
+        state = np.reshape(state, [1, state_size])
 
         episode_rewards = 0
 

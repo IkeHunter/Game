@@ -15,22 +15,22 @@ class Agent:
         initializer = tf.contrib.layers.xavier_initializer()  # initializes some starting values for the neurons
 
         # this will let someone pass any number of states into the network in a batch
-        self.input_layer = tf.placeholder(dtype=tf.float32, shape=[None, state_size])
+        self.input_layer = tf.placeholder(dtype=tf.float32, shape=[None, 1, state_size])
 
         # Neural net starts here...
 
         # creates a hidden layer connected to input layer with 8 units, relu activation, and the xavier initializer
-        # hidden_layer_1 = tf.layers.dense(self.input_layer, 2, activation=tf.nn.relu, kernel_initializer=initializer)
-        # hidden_layer_2 = tf.layers.dense(hidden_layer_1, 2, activation=tf.nn.relu, kernel_initializer=initializer)
+        hidden_layer_1 = tf.layers.dense(self.input_layer, 2, activation=tf.nn.relu, kernel_initializer=initializer)
+        hidden_layer_2 = tf.layers.dense(hidden_layer_1, 2, activation=tf.nn.relu, kernel_initializer=initializer)
 
-        conv_layer_1 = tf.layers.conv1d(self.input_layer, filters=32, kernel_size=3, padding="same", activation=tf.nn.relu)
-        pooling_layer_1 = tf.layers.max_pooling1d(conv_layer_1, pool_size=3, strides=1)
+        conv_layer_1 = tf.layers.conv1d(hidden_layer_2, filters=32, kernel_size=3, padding="same", activation=tf.nn.relu)
+        pooling_layer_1 = tf.layers.max_pooling1d(conv_layer_1, pool_size=1, strides=1)
 
         conv_layer_2 = tf.layers.conv1d(pooling_layer_1, filters=32, kernel_size=2, padding="same", activation=tf.nn.relu)
-        pooling_layer_2 = tf.layers.max_pooling1d(conv_layer_2, pool_size=2, strides=2)
+        pooling_layer_2 = tf.layers.max_pooling1d(conv_layer_2, pool_size=1, strides=2)
 
         conv_layer_3 = tf.layers.conv1d(pooling_layer_2, filters=32, kernel_size=2, padding="same", activation=tf.nn.relu)
-        pooling_layer_3 = tf.layers.max_pooling1d(conv_layer_3, pool_size=2, strides=2)
+        pooling_layer_3 = tf.layers.max_pooling1d(conv_layer_3, pool_size=1, strides=2)
 
         flattened_pooling = tf.layers.flatten(pooling_layer_3)
         dense_layer = tf.layers.dense(flattened_pooling, 1024, activation=tf.nn.relu)
@@ -67,20 +67,20 @@ class Agent:
         # Operation runs every time model needs to appy what it has learned from its games and update its parameters
         self.update_gradients = optimizer.apply_gradients(zip(self.gradients_to_apply, tf.trainable_variables()))
 
-    def discount_normalize_rewards(self, rewards):
-
-        self.discounted_rewards = np.zeros_like(rewards)
-        total_rewards = 0
-
-        for i in reversed(range(len(rewards))):
-            total_rewards = total_rewards * self.discount_rate + rewards[i]
-            self.discounted_rewards[i] = total_rewards
-
-        # Normalize rewards across multiple game lengths
-        self.discounted_rewards -= np.mean(self.discounted_rewards)
-        self.discounted_rewards /= np.std(self.discounted_rewards)
-
-        return self.discounted_rewards
+    # def discount_normalize_rewards(self, rewards):
+    #
+    #     self.discounted_rewards = np.zeros_like(rewards)
+    #     total_rewards = 0
+    #
+    #     for i in reversed(range(len(rewards))):
+    #         total_rewards = total_rewards * self.discount_rate + rewards[i]
+    #         self.discounted_rewards[i] = total_rewards
+    #
+    #     # Normalize rewards across multiple game lengths
+    #     self.discounted_rewards -= np.mean(self.discounted_rewards)
+    #     self.discounted_rewards /= np.std(self.discounted_rewards)
+    #
+    #     return self.discounted_rewards
 
     def random_agent(self):
         games_to_play = 10

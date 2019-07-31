@@ -69,7 +69,9 @@ class Program:
         self.reward = 0.0
         self.max_moves = self.player.max_moves
         self.has_chest = 0
-        self.has_won = 0
+        self.has_chest_bool = False
+        self.has_won = False
+        self.move_log = []
 
     def obtained_chest(self):
         if self.current_location == 12 and self.player.has_chest is False:
@@ -78,13 +80,14 @@ class Program:
             self.player.obtains_chest()
             self.reward += 100.0
             self.has_chest = 1
+            self.has_chest_bool = True
 
     def player_won(self):
         if (self.has_chest == 0) and (self.current_location == 11) and (self.player.view_health_num() > 0):
             text = "You Win! \n "
             self.render_text(text)
             self.reward += 500.0
-            self.has_won = 1
+            self.has_won = True
             self.loop_break = True
 
     def init_play(self):
@@ -248,6 +251,9 @@ class Program:
         return self.loop_break
 
     def render_text(self, text):
+
+        self.move_log += text
+
         if self.render:
             print(text)
 
@@ -264,20 +270,26 @@ class GameMethods:
         self.game.encountered = 0
         self.game.loop_break = False
         self.game.reward = 0.0
+        self.game.has_chest = 0
+        self.game.has_chest_bool = False
+        self.game.has_won = False
+        self.game.move_log = []
 
         observations = np.array([self.game.encountered, self.game.has_chest])
 
         return self.game.player.health, self.game.player.moves, self.game.current_location, observations
 
     def render(self, status):
-        current = self.game.current_location
+        # current = self.game.current_location
+        logs = self.game.move_log
 
         if status == "off":
             self.game.render = False
         elif status == "on":
             self.game.render = True
 
-        return current
+        # return current
+        return logs
 
     def step(self, action):
 
@@ -292,12 +304,13 @@ class GameMethods:
         reward = np.array([self.game.reward])
         done = self.game.loop_break
         won = self.game.has_won
+        chest = self.game.has_chest
         info = dict()
 
         return obs, reward, done, info
 
     def has_won(self):
-        return self.game.has_won, self.game.has_chest
+        return self.game.has_won, self.game.has_chest_bool
 
     def close(self):
         self.game.loop_break = True

@@ -98,3 +98,757 @@ Average reward / 2000 eps:
 1807.615
 Average reward / 2000 eps: 
 1874.7785
+Average reward / 2000 eps: 
+nan
+Average reward / 2000 eps: 
+1743.22
+Average reward / 2000 eps: 
+1722.266
+Average reward / 2000 eps: 
+1686.5765
+Average reward / 2000 eps: 
+1800.2645
+Average reward / 2000 eps: 
+1768.8485
+Average reward / 2000 eps: 
+1708.3325
+Average reward / 2000 eps: 
+1750.5915
+Average reward / 2000 eps: 
+1722.8305
+Average reward / 2000 eps: 
+1700.2445
+Average reward / 2000 eps: 
+1684.571
+Average reward / 2000 eps: 
+1766.707
+Average reward / 2000 eps: 
+1751.968
+Average reward / 2000 eps: 
+1666.946
+Average reward / 2000 eps: 
+nan
+Average reward / 2000 eps: 
+1640.024
+Average reward / 2000 eps: 
+1708.3875
+Average reward / 2000 eps: 
+1738.163
+Average reward / 2000 eps: 
+1608.493
+Average reward / 2000 eps: 
+1716.685
+Average reward / 2000 eps: 
+1663.3955
+Average reward / 2000 eps: 
+1708.753
+Average reward / 2000 eps: 
+1691.27
+Average reward / 2000 eps: 
+1670.311
+Average reward / 2000 eps: 
+1664.3515
+Average reward / 2000 eps: 
+1767.255
+Average reward / 2000 eps: 
+1670.5815
+Average reward / 2000 eps: 
+1733.641
+Average reward / 2000 eps: 
+1714.312
+Average reward / 2000 eps: 
+1749.646
+Average reward / 2000 eps: 
+1763.8885
+Average reward / 2000 eps: 
+1765.185
+Average reward / 2000 eps: 
+1704.69
+Average reward / 2000 eps: 
+nan
+Average reward / 2000 eps: 
+1750.0365
+Average reward / 2000 eps: 
+1724.515
+Average reward / 2000 eps: 
+1666.8455
+Average reward / 2000 eps: 
+1696.3655
+Average reward / 2000 eps: 
+1647.382
+Average reward / 2000 eps: 
+1731.5015
+Average reward / 2000 eps: 
+1673.7895
+Average reward / 2000 eps: 
+1660.1175
+Average reward / 2000 eps: 
+1673.862
+Average reward / 2000 eps: 
+1717.4965
+Average reward / 2000 eps: 
+1726.709
+Average reward / 2000 eps: 
+1717.598
+Average reward / 2000 eps: 
+1730.0665
+Average reward / 2000 eps: 
+1772.7795
+Average reward / 2000 eps: 
+1726.563
+Average reward / 2000 eps: 
+1771.4685
+Average reward / 2000 eps: 
+1666.8515
+Average reward / 2000 eps: 
+1643.0955
+Average reward / 2000 eps: 
+1784.681
+Average reward / 2000 eps: 
+1787.167
+Average reward / 2000 eps: 
+1734.149
+Average reward / 2000 eps: 
+1766.611
+Average reward / 2000 eps: 
+1751.972
+Average reward / 2000 eps: 
+1760.1815
+Average reward / 2000 eps: 
+1763.0355
+Average reward / 2000 eps: 
+1700.8395
+Average reward / 2000 eps: 
+1773.6175
+Average reward / 2000 eps: 
+1824.1175
+Average reward / 2000 eps: 
+1811.781
+Average reward / 2000 eps: 
+1809.103
+Average reward / 2000 eps: 
+1716.907
+Average reward / 2000 eps: 
+1740.59
+Average reward / 2000 eps: 
+1746.697
+Average reward / 2000 eps: 
+1838.029
+Average reward / 2000 eps: 
+1860.6145
+Average reward / 2000 eps: 
+1796.974
+Average reward / 2000 eps: 
+1794.8815
+Average reward / 2000 eps: 
+1821.4095
+Average reward / 2000 eps: 
+1858.3015
+Average reward / 2000 eps: 
+1793.026
+Average reward / 2000 eps: 
+1797.4345
+Average reward / 2000 eps: 
+1827.9035
+Average reward / 2000 eps: 
+1911.014
+Average reward / 2000 eps: 
+1873.4615
+Average reward / 2000 eps: 
+1839.729
+Average reward / 2000 eps: 
+1814.7745
+Average reward / 2000 eps: 
+1812.69
+Average reward / 2000 eps: 
+1911.67
+Average reward / 2000 eps: 
+1856.5
+Average reward / 2000 eps: 
+1848.905
+Average reward / 2000 eps: 
+1885.3415
+Average reward / 2000 eps: 
+1952.382
+Average reward / 2000 eps: 
+1926.829
+Average reward / 2000 eps: 
+1965.2825
+Average reward / 2000 eps: 
+1930.6205
+Average reward / 2000 eps: 
+1902.3765
+Average reward / 2000 eps: 
+2027.47
+Average reward / 2000 eps: 
+2076.9325
+Average reward / 2000 eps: 
+1941.3335
+Average reward / 2000 eps: 
+2034.643
+Average reward / 2000 eps: 
+1991.6835
+Average reward / 2000 eps: 
+1945.7845
+Average reward / 2000 eps: 
+2011.5065
+Average reward / 2000 eps: 
+1923.561
+Average reward / 2000 eps: 
+2019.504
+Average reward / 2000 eps: 
+1963.9185
+Average reward / 2000 eps: 
+2030.2775
+Average reward / 2000 eps: 
+2010.2835
+Average reward / 2000 eps: 
+2011.3575
+Average reward / 2000 eps: 
+1960.526
+Average reward / 2000 eps: 
+2020.004
+Average reward / 2000 eps: 
+2051.664
+Average reward / 2000 eps: 
+2015.665
+Average reward / 2000 eps: 
+2150.8205
+Average reward / 2000 eps: 
+2128.8135
+Average reward / 2000 eps: 
+2009.6585
+Average reward / 2000 eps: 
+2077.7995
+Average reward / 2000 eps: 
+2054.139
+Average reward / 2000 eps: 
+2084.34
+Average reward / 2000 eps: 
+2063.9735
+Average reward / 2000 eps: 
+2018.29
+Average reward / 2000 eps: 
+2093.721
+Average reward / 2000 eps: 
+2177.361
+Average reward / 2000 eps: 
+2056.9205
+Average reward / 2000 eps: 
+2040.825
+Average reward / 2000 eps: 
+2118.0065
+Average reward / 2000 eps: 
+2139.316
+Average reward / 2000 eps: 
+2148.184
+Average reward / 2000 eps: 
+2099.454
+Average reward / 2000 eps: 
+2171.2275
+Average reward / 2000 eps: 
+2118.1235
+Average reward / 2000 eps: 
+2103.155
+Average reward / 2000 eps: 
+2083.5365
+Average reward / 2000 eps: 
+2150.894
+Average reward / 2000 eps: 
+2140.863
+Average reward / 2000 eps: 
+2173.0365
+Average reward / 2000 eps: 
+2159.3725
+Average reward / 2000 eps: 
+2141.101
+Average reward / 2000 eps: 
+2171.007
+Average reward / 2000 eps: 
+2235.07
+Average reward / 2000 eps: 
+2166.6905
+Average reward / 2000 eps: 
+2168.5125
+Average reward / 2000 eps: 
+2149.41
+Average reward / 2000 eps: 
+2226.982
+Average reward / 2000 eps: 
+2114.8115
+Average reward / 2000 eps: 
+2210.071
+Average reward / 2000 eps: 
+2130.402
+Average reward / 2000 eps: 
+2323.3235
+Average reward / 2000 eps: 
+2209.141
+Average reward / 2000 eps: 
+2235.3655
+Average reward / 2000 eps: 
+2184.0085
+Average reward / 2000 eps: 
+2289.0605
+Average reward / 2000 eps: 
+2193.9625
+Average reward / 2000 eps: 
+2299.845
+Average reward / 2000 eps: 
+2264.7575
+Average reward / 2000 eps: 
+2227.3315
+Average reward / 2000 eps: 
+2250.848
+Average reward / 2000 eps: 
+2197.034
+Average reward / 2000 eps: 
+2310.4205
+Average reward / 2000 eps: 
+2349.0675
+Average reward / 2000 eps: 
+2254.8915
+Average reward / 2000 eps: 
+2210.66
+Average reward / 2000 eps: 
+2411.815
+Average reward / 2000 eps: 
+2253.6645
+Average reward / 2000 eps: 
+2267.52
+Average reward / 2000 eps: 
+2305.5785
+Average reward / 2000 eps: 
+2331.0115
+Average reward / 2000 eps: 
+2283.8115
+Average reward / 2000 eps: 
+2298.544
+Average reward / 2000 eps: 
+2260.562
+Average reward / 2000 eps: 
+2338.908
+Average reward / 2000 eps: 
+2244.969
+Average reward / 2000 eps: 
+2331.547
+Average reward / 2000 eps: 
+2327.202
+Average reward / 2000 eps: 
+2339.588
+Average reward / 2000 eps: 
+2290.606
+Average reward / 2000 eps: 
+2332.097
+Average reward / 2000 eps: 
+2433.989
+Average reward / 2000 eps: 
+2326.464
+Average reward / 2000 eps: 
+2344.5955
+Average reward / 2000 eps: 
+2320.42
+Average reward / 2000 eps: 
+2311.017
+Average reward / 2000 eps: 
+2373.8295
+Average reward / 2000 eps: 
+2321.085
+Average reward / 2000 eps: 
+2357.9915
+Average reward / 2000 eps: 
+2327.8925
+Average reward / 2000 eps: 
+2386.475
+Average reward / 2000 eps: 
+2422.334
+Average reward / 2000 eps: 
+2381.39
+Average reward / 2000 eps: 
+2373.659
+Average reward / 2000 eps: 
+2250.019
+Average reward / 2000 eps: 
+2307.021
+Average reward / 2000 eps: 
+2287.839
+Average reward / 2000 eps: 
+2315.9765
+Average reward / 2000 eps: 
+2364.2555
+Average reward / 2000 eps: 
+2412.242
+Average reward / 2000 eps: 
+2390.476
+Average reward / 2000 eps: 
+2302.518
+Average reward / 2000 eps: 
+2273.5205
+Average reward / 2000 eps: 
+2427.9385
+Average reward / 2000 eps: 
+2344.625
+Average reward / 2000 eps: 
+2323.7795
+Average reward / 2000 eps: 
+2310.9765
+Average reward / 2000 eps: 
+2276.579
+Average reward / 2000 eps: 
+2243.4415
+Average reward / 2000 eps: 
+2262.176
+Average reward / 2000 eps: 
+2298.2105
+Average reward / 2000 eps: 
+2342.852
+Average reward / 2000 eps: 
+2252.8385
+Average reward / 2000 eps: 
+2259.4305
+Average reward / 2000 eps: 
+2317.45
+Average reward / 2000 eps: 
+2231.9915
+Average reward / 2000 eps: 
+2247.3385
+Average reward / 2000 eps: 
+2226.8505
+Average reward / 2000 eps: 
+2232.3655
+Average reward / 2000 eps: 
+2194.1895
+Average reward / 2000 eps: 
+2179.467
+Average reward / 2000 eps: 
+2141.9185
+Average reward / 2000 eps: 
+2188.132
+Average reward / 2000 eps: 
+2190.505
+Average reward / 2000 eps: 
+2112.578
+Average reward / 2000 eps: 
+2130.267
+Average reward / 2000 eps: 
+2147.0555
+Average reward / 2000 eps: 
+2129.1345
+Average reward / 2000 eps: 
+2147.5285
+Average reward / 2000 eps: 
+2162.3715
+Average reward / 2000 eps: 
+2065.889
+Average reward / 2000 eps: 
+2178.5945
+Average reward / 2000 eps: 
+2065.8335
+Average reward / 2000 eps: 
+2130.9985
+Average reward / 2000 eps: 
+2100.526
+Average reward / 2000 eps: 
+2103.218
+Average reward / 2000 eps: 
+2095.8945
+Average reward / 2000 eps: 
+2127.834
+Average reward / 2000 eps: 
+2131.5885
+Average reward / 2000 eps: 
+1999.0225
+Average reward / 2000 eps: 
+2118.562
+Average reward / 2000 eps: 
+2135.307
+Average reward / 2000 eps: 
+2082.403
+Average reward / 2000 eps: 
+2013.7885
+Average reward / 2000 eps: 
+2031.139
+Average reward / 2000 eps: 
+2133.977
+Average reward / 2000 eps: 
+2032.5155
+Average reward / 2000 eps: 
+2075.721
+Average reward / 2000 eps: 
+2051.619
+Average reward / 2000 eps: 
+2026.2475
+Average reward / 2000 eps: 
+2028.806
+Average reward / 2000 eps: 
+2016.7585
+Average reward / 2000 eps: 
+1971.363
+Average reward / 2000 eps: 
+1986.512
+Average reward / 2000 eps: 
+1942.719
+Average reward / 2000 eps: 
+2031.5755
+Average reward / 2000 eps: 
+2020.756
+Average reward / 2000 eps: 
+2035.2735
+Average reward / 2000 eps: 
+1922.4235
+Average reward / 2000 eps: 
+1926.8455
+Average reward / 2000 eps: 
+1992.0255
+Average reward / 2000 eps: 
+1974.8765
+Average reward / 2000 eps: 
+1935.534
+Average reward / 2000 eps: 
+2006.981
+Average reward / 2000 eps: 
+1966.129
+Average reward / 2000 eps: 
+1931.073
+Average reward / 2000 eps: 
+1956.551
+Average reward / 2000 eps: 
+1958.4655
+Average reward / 2000 eps: 
+2007.5715
+Average reward / 2000 eps: 
+1902.192
+Average reward / 2000 eps: 
+1937.91
+Average reward / 2000 eps: 
+1960.383
+Average reward / 2000 eps: 
+1905.058
+Average reward / 2000 eps: 
+1892.2745
+Average reward / 2000 eps: 
+1882.589
+Average reward / 2000 eps: 
+1873.295
+Average reward / 2000 eps: 
+1937.0315
+Average reward / 2000 eps: 
+1959.091
+Average reward / 2000 eps: 
+1930.169
+Average reward / 2000 eps: 
+1934.349
+Average reward / 2000 eps: 
+1948.4025
+Average reward / 2000 eps: 
+1965.9415
+Average reward / 2000 eps: 
+1941.189
+Average reward / 2000 eps: 
+1914.4735
+Average reward / 2000 eps: 
+1886.529
+Average reward / 2000 eps: 
+1940.1295
+Average reward / 2000 eps: 
+1980.7155
+Average reward / 2000 eps: 
+1955.9025
+Average reward / 2000 eps: 
+1890.287
+Average reward / 2000 eps: 
+1892.415
+Average reward / 2000 eps: 
+1887.501
+Average reward / 2000 eps: 
+1916.02
+Average reward / 2000 eps: 
+1845.2115
+Currently on episode 0, Average reward per 2000 eps is nan
+Number of Chests obtained: None, Number of wins: None
+Currently on episode 0, Average reward per 2000 eps is nan
+Number of Chests obtained: 0, Number of wins: 0
+Currently on episode 0, Average reward per 2000 eps is nan
+Number of Chests obtained: 0, Number of wins: 0
+Currently on episode 2000, Average reward per 2000 eps is 1738.5705
+Number of Chests obtained: 1978, Number of wins: 1980
+Currently on episode 4000, Average reward per 2000 eps is 1662.184
+Number of Chests obtained: 2000, Number of wins: 2000
+Currently on episode 0, Average reward per 2000 eps is nan
+Number of Chests obtained: 0, Number of wins: 0
+Currently on episode 2000, Average reward per 2000 eps is 1729.336
+Number of Chests obtained: 1964, Number of wins: 1965
+Currently on episode 4000, Average reward per 2000 eps is 1701.0725
+Number of Chests obtained: 2000, Number of wins: 2000
+Currently on episode 0, Average reward per 2000 eps is nan
+Number of Chests obtained: 0, Number of wins: 0
+Currently on episode 2000, Average reward per 2000 eps is 1610.407
+Number of Chests obtained: 1993, Number of wins: 0
+Currently on episode 4000, Average reward per 2000 eps is 1658.2865
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 6000, Average reward per 2000 eps is 1662.0235
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 8000, Average reward per 2000 eps is 1720.205
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 10000, Average reward per 2000 eps is 1648.816
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 12000, Average reward per 2000 eps is 1703.0385
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 14000, Average reward per 2000 eps is 1653.8375
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 16000, Average reward per 2000 eps is 1755.281
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 18000, Average reward per 2000 eps is 1642.7215
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 20000, Average reward per 2000 eps is 1692.148
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 22000, Average reward per 2000 eps is 1689.51
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 24000, Average reward per 2000 eps is 1717.767
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 26000, Average reward per 2000 eps is 1743.798
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 28000, Average reward per 2000 eps is 1759.2675
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 30000, Average reward per 2000 eps is 1671.0665
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 32000, Average reward per 2000 eps is 1712.0785
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 34000, Average reward per 2000 eps is 1736.541
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 36000, Average reward per 2000 eps is 1791.8275
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 38000, Average reward per 2000 eps is 1750.3365
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 40000, Average reward per 2000 eps is 1739.9715
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 42000, Average reward per 2000 eps is 1746.7945
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 44000, Average reward per 2000 eps is 1773.1555
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 46000, Average reward per 2000 eps is 1751.993
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 48000, Average reward per 2000 eps is 1731.743
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 50000, Average reward per 2000 eps is 1749.0955
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 52000, Average reward per 2000 eps is 1745.6085
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 54000, Average reward per 2000 eps is 1806.705
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 56000, Average reward per 2000 eps is 1766.3875
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 58000, Average reward per 2000 eps is 1857.5775
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 60000, Average reward per 2000 eps is 1747.674
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 62000, Average reward per 2000 eps is 1783.009
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 64000, Average reward per 2000 eps is 1787.403
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 66000, Average reward per 2000 eps is 1771.441
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 68000, Average reward per 2000 eps is 1764.8375
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 70000, Average reward per 2000 eps is 1761.2395
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 72000, Average reward per 2000 eps is 1871.311
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 74000, Average reward per 2000 eps is 1788.644
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 76000, Average reward per 2000 eps is 1903.9875
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 78000, Average reward per 2000 eps is 1822.5075
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 80000, Average reward per 2000 eps is 1876.5135
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 82000, Average reward per 2000 eps is 1790.2975
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 84000, Average reward per 2000 eps is 1877.3745
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 86000, Average reward per 2000 eps is 1879.8925
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 88000, Average reward per 2000 eps is 1872.3615
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 90000, Average reward per 2000 eps is 1881.2215
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 92000, Average reward per 2000 eps is 1851.091
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 94000, Average reward per 2000 eps is 1925.6205
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 96000, Average reward per 2000 eps is 1882.8465
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 98000, Average reward per 2000 eps is 1928.7175
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 100000, Average reward per 2000 eps is 1917.225
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 102000, Average reward per 2000 eps is 1895.1475
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 104000, Average reward per 2000 eps is 1887.963
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 106000, Average reward per 2000 eps is 1930.7135
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 108000, Average reward per 2000 eps is 1949.9395
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 110000, Average reward per 2000 eps is 1937.5525
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 112000, Average reward per 2000 eps is 1931.023
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 114000, Average reward per 2000 eps is 2042.488
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 116000, Average reward per 2000 eps is 2020.6575
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 118000, Average reward per 2000 eps is 1903.3875
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 120000, Average reward per 2000 eps is 1979.694
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 122000, Average reward per 2000 eps is 1992.2255
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 124000, Average reward per 2000 eps is 2014.3075
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 126000, Average reward per 2000 eps is 2008.674
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 128000, Average reward per 2000 eps is 1930.326
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 130000, Average reward per 2000 eps is 1993.3425
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 0, Average reward per 2000 eps is nan
+Number of Chests obtained: 0, Number of wins: 0
+Currently on episode 2000, Average reward per 2000 eps is 1708.014
+Number of Chests obtained: 1988, Number of wins: 0
+Currently on episode 4000, Average reward per 2000 eps is 1721.5695
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 6000, Average reward per 2000 eps is 1734.174
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 8000, Average reward per 2000 eps is 1681.694
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 10000, Average reward per 2000 eps is 1698.28
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 12000, Average reward per 2000 eps is 1735.9885
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 14000, Average reward per 2000 eps is 1806.684
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 16000, Average reward per 2000 eps is 1726.945
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 18000, Average reward per 2000 eps is 1682.161
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 20000, Average reward per 2000 eps is 1717.538
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 22000, Average reward per 2000 eps is 1730.766
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 24000, Average reward per 2000 eps is 1752.86
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 26000, Average reward per 2000 eps is 1750.7875
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 28000, Average reward per 2000 eps is 1676.083
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 30000, Average reward per 2000 eps is 1804.532
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 32000, Average reward per 2000 eps is 1709.518
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 34000, Average reward per 2000 eps is 1743.529
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 36000, Average reward per 2000 eps is 1729.969
+Number of Chests obtained: 2000, Number of wins: 0
+Currently on episode 38000, Average reward per 2000 eps is 1820.7385
+Number of Chests obtained: 2000, Number of wins: 0

@@ -33,13 +33,17 @@ def neural_network_loop():
     num_actions = 4
     state_size = 2
 
-    index = 2
+    index = 3
+
+    has_chest = None
+    has_won = None
 
     path = "./text_adventure_{}/".format(index)  # for checkpoints
 
-    training_episodes = 100000  # 1000
+    training_episodes = 500000  # 1000
     max_steps_per_episode = 1000  # 5000
     episode_batch_size = 64
+    break_episode = 2000
 
     agent = Agent(num_actions, state_size)
 
@@ -54,7 +58,8 @@ def neural_network_loop():
         sess.run(init)
 
         total_episode_rewards = []
-        amt_wins = []
+        wins = 0
+        chests = 0
 
         gradient_buffer = sess.run(tf.trainable_variables())
 
@@ -77,9 +82,10 @@ def neural_network_loop():
 
                 if (episode % 5000 == 0) and (episode is not 0):
                     print("Currently on episode " + str(episode))
-                    training_current = env.render("on")
+                    training_logs = env.render("on")
                 else:
-                    training_current = env.render("off")
+                    env.render("off")
+                    training_logs = False
 
                 if (step % 1000 == 0) and (step is not 0):
                     print("Currently on step " + str(step))
@@ -97,13 +103,13 @@ def neural_network_loop():
                 # Save the resulting states, rewards and whether the episode finished
                 state_next, reward, done, _ = env.step(action_choice)
 
-                has_won, has_chest = env.has_won()
+                # has_won, has_chest = env.has_won()
 
-                if has_won is True:
-                    amt_wins.append("Has Won")
-
-                if has_chest is True:
-                    amt_wins.append("Has Chest")
+                # if has_won is True:
+                #     wins.append("Has Won")
+                #
+                # if has_chest is True:
+                #     wins.append("Has Chest")
 
                 episode_history.append([[state], action_choice, reward, state_next])
                 state = state_next
@@ -117,6 +123,25 @@ def neural_network_loop():
                 if done or step + 1 == max_steps_per_episode:
                     total_episode_rewards.append(episode_rewards)
                     episode_history = np.array(episode_history)
+
+                    has_won, has_chest = env.has_won()
+
+                    if has_won:
+                        wins += 1
+
+                        if training_logs:
+
+                            with open("win_logs.txt", 'a') as logs:
+                                for i in range(training_logs):
+                                    if i == 0:
+                                        print()
+                                        print('-' * 20, file=logs)
+                                        print("While on episode {}, machine won as followed: ".format(episode), file=logs)
+                                        print('-' * 20, file=logs)
+                                    print(training_logs[i], file=logs)
+
+                    if has_chest:
+                        chests += 1
 
                     # normalize rewards fn on the stored rewards in episode history
                     episode_history[:, 2] = discount_normalize_rewards(episode_history[:, 2])
@@ -143,11 +168,23 @@ def neural_network_loop():
                     for index, gradient in enumerate(gradient_buffer):
                         gradient_buffer[index] = gradient * 0
 
-                if episode % 2000 == 0 and step == 1:
+                if episode % break_episode == 0 and step == 1:
+
+                    def display_stats(file=None):
+                        print("Currently on episode {}, Average reward per {} eps is {}"
+                              .format(episode, break_episode, avg_rewards), file=file)
+                        print("Number of Chests obtained: {}, Number of wins: {}".format(chests, wins), file=file)
+
                     saver.save(sess, path + "pg-checkpoint", episode)
-                    print("Average reward / 2000 eps: " + str(np.mean(total_episode_rewards[-2000:])))
+                    avg_rewards = str(np.mean(total_episode_rewards[-2000:]))
+
+                    display_stats()
+
                     with open("logs.txt", "a") as log_file:
-                        print("Average reward / 2000 eps: \n" + str(np.mean(total_episode_rewards[-2000:])), file=log_file)
+                        display_stats(log_file)
+
+                    # wins = 0
+                    # chests = 0
 
     # print("Now Testing neural network... \n")
     # testing_episodes = 2
